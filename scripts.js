@@ -1,24 +1,55 @@
 const app = Vue.createApp({
   data() {
     return {
-      bulbStatus: 'Bulb is off',
-      isBulbOn: false
+      tvStatus: "The Television is currently off",
+      isTvOn: false,
+      powerBtn: "./power-off.svg",
+      programCounter: 1,
+      programs: [
+        {
+          id: "1",
+          title: "Jumangi",
+          url: "./Jumanji.mp4",
+        },
+        {
+          id: "2",
+          title: "Sturdy Stanta",
+          url: "./Ha_wait_a_minute.mp4",
+        },
+        {
+          id: "3",
+          title: "Ola Ola Ola",
+          url: "./Ola.mp4",
+        },
+      ],
     };
   },
+
   methods: {
-    turnOn() {
-      this.bulbStatus = 'Bulb is on';
-      this.isBulbOn = true;
+    togglePower() {
+      this.isTvOn = !this.isTvOn;
+      this.tvStatus = this.isTvOn ? "Tv is on" : "Tv is off";
+      if (this.isTvOn) {
+        this.powerBtn = "./power-on.svg";
+      } else {
+        this.powerBtn = "./power-off.svg";
+      }
     },
-    turnOff() {
-      this.bulbStatus = 'Bulb is off';
-      this.isBulbOn = false;
+
+    forward() {
+      this.programCounter++;
+      if (this.programCounter > this.programs.length) {
+        this.programCounter = 1;
+      }
     },
-    toggleBulb() {
-      this.isBulbOn = !this.isBulbOn;
-      this.bulbStatus = this.isBulbOn ? 'Bulb is on' : 'Bulb is off';
-    }
-  }
+
+    backward() {
+      this.programCounter--;
+      if (this.programCounter < this.programs[0].id) {
+        this.programCounter = this.programs.length;
+      }
+    },
+  },
 });
 
-app.mount('#cse');
+app.mount("#cse");

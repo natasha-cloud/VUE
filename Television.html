@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Television Analogy</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="cse">
+      <h4>{{ tvStatus }}</h4>
+      <div class="tele-container">
+        <div class="inner-container">
+          <template v-for="program  in programs" v>
+            <video
+              controls
+              autoplay
+              class="tele-program"
+              v-if="programCounter == program.id && isTvOn"
+            >
+              <source :src="program.url" width="560px" heigh="330px" />
+            </video>
+          </template>
+        </div>
+        <div class="btn-container">
+          <div class="tele-control">
+            <img
+              class="tele-btn"
+              @click="backward"
+              src="./previous.png"
+              alt="previous button"
+            />
+            <img
+              class="tele-btn"
+              @click="forward"
+              src="./next.png"
+              alt="Next button"
+            />
+            <img
+              class="tele-btn"
+              @click="togglePower"
+              :src="powerBtn"
+              alt="Power button"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3.2.31/dist/vue.global.js"></script>
+    <script src="scripts.js"></script>
+  </body>
+</html>
